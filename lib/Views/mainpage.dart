@@ -1,8 +1,10 @@
 import 'package:beyouth/Resources/colorresource.dart';
 import 'package:beyouth/Views/cartpage.dart';
+import 'package:beyouth/Views/search_page.dart';
 import 'package:flutter/material.dart';
 
 import 'accountspage.dart';
+import 'category_page.dart';
 import 'homepage.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,9 +19,10 @@ class _MainPageState extends State<MainPage> {
 
   final totalPage=[
     HomePage(),
-    Text('hii'),
+    CategoryPage(),
+    AccountsPage(),
     CartPage(),
-    AccountsPage()
+
   ];
 
   void changePage(index){
@@ -33,7 +36,6 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
   body:totalPage[pageIndex],
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
         backgroundColor: Colors.orange,
@@ -49,13 +51,14 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.store),label: 'Home'),
          BottomNavigationBarItem(
             backgroundColor: ColorResource.bottomNavcolor,
-            icon: Icon(Icons.search),label: 'Search'),
+            icon: Icon(Icons.category),label: 'Category'),
+          BottomNavigationBarItem(
+              backgroundColor: ColorResource.bottomNavcolor,
+              icon: Icon(Icons.account_circle),label: 'Accounts'),
          BottomNavigationBarItem(
             backgroundColor:ColorResource.bottomNavcolor,
             icon: Icon(Icons.shopping_cart),label: 'Cart'),
-         BottomNavigationBarItem(
-            backgroundColor: ColorResource.bottomNavcolor,
-            icon: Icon(Icons.account_circle),label: 'Accounts')
+
       ],
         onTap: changePage,
 

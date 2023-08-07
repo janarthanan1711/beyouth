@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'Resources/config.dart';
 import 'Resources/theme.dart';
 import 'Views/mainpage.dart';
+import 'numbercheck.dart';
 
 void main() async{
   Hive.init;

@@ -9,13 +9,16 @@ class CartList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 500,
-      child: ListView.builder(
-          itemCount: cartmodelDatas.length,
-          itemBuilder: (ctx,index){
-            return CardWidgetCart(cartModel: cartmodelDatas[index]);
-          }),
+    return SizedBox(
+      height: 450,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: ListView.builder(
+            itemCount: cartmodelDatas.length,
+            itemBuilder: (ctx,index){
+              return CardWidgetCart(cartModel: cartmodelDatas[index]);
+            }),
+      ),
     );
   }
 }
