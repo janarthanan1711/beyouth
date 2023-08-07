@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         create: (context) => Mytheme(),
         child: Consumer<Mytheme>(builder: (context,state,child){
           return MaterialApp(
-              title: 'Celeto',
+              title: 'BeYouth',
               debugShowCheckedModeBanner: false,
               // theme: ThemeData(
               //   primarySwatch: Colors.blue,
