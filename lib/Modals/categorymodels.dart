@@ -14,6 +14,23 @@ var categoryDatas = [
   {'categoryImages':'assets/images/boxers.jpg','categoryTitles': 'BOXERS'}
 ];
 
+class WomenCategories{
+  String? categoryImages;
+  String? categoryTitles;
+
+  WomenCategories(this.categoryImages,this.categoryTitles);
+}
+List womenCategoryList = womenCategoryDatas.map((e) => WomenCategories(e['categoryImages'], e['categoryTitles'])).toList();
+var womenCategoryDatas = [
+  {'categoryImages':'assets/images/oversizedwomen.jpg','categoryTitles': 'OVERSIZE T-SHIRTS'},
+  {'categoryImages':'assets/images/pinkgirl.jpg','categoryTitles': 'KURTI'},
+  {'categoryImages':'assets/images/printedwomen.jpg','categoryTitles': 'PRINTED T-SHIRTS'},
+  {'categoryImages':'assets/images/plainwomen.jpg','categoryTitles': 'PLAIN T-SHIRTS'},
+  {'categoryImages':'assets/images/shirtswomen.jpg','categoryTitles': 'SHIRTS'},
+  {'categoryImages':'assets/images/blackgirl.jpg','categoryTitles': 'TOPS'},
+  {'categoryImages':'assets/images/jeggings.jpg','categoryTitles': 'JEGGINGS'}
+];
+
 class ShirtCategories{
   String? categoryImages;
   String? categoryTitles;

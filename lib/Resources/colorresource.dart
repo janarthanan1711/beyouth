@@ -9,6 +9,7 @@ class ColorResource{
   static const colorDark = Color(0xFF414545);
   static const categoryBackground = Color(0xFFdbdac5);
   static const iconBackgroundColor = Color(0xFFF9E79F);
+  static const ratingColor = Color(0xFFF1C40F);
 
 
 }

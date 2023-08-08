@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'Resources/config.dart';
@@ -8,8 +10,19 @@ import 'Views/mainpage.dart';
 import 'numbercheck.dart';
 
 void main() async{
-  Hive.init;
-  box = await Hive.openBox('easyTheme');
+
+  if (kIsWeb) {
+    box = await Hive.openBox('easyTheme');
+  } else {
+    WidgetsFlutterBinding.ensureInitialized();
+    final documentDirectory = await getApplicationDocumentsDirectory();
+    Hive.init(documentDirectory.path);
+    box = await Hive.openBox('easyTheme');
+  }
+  // WidgetsFlutterBinding.ensureInitialized();
+  // final documentDirectory = await getApplicationDocumentsDirectory();
+  // Hive.init(documentDirectory.path);
+  // box = await Hive.openBox('easyTheme');
   runApp(const MyApp());
 }
 

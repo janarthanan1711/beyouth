@@ -43,15 +43,14 @@ class _AccountsPageState extends State<AccountsPage> {
                   //   ),
                   // ),
                   const SizedBox(height: 5,),
-                  Text('UserName',style: TextStyle(color: Mytheme.isDark == false ? const Color(0xFFCD7F32) : Colors.white,fontSize: 20),),
+                  Text('UserName',style: TextStyle(color: Mytheme.isDark == false ?  ColorResource.colorYellow : Colors.white,fontSize: 20),),
                   const SizedBox(height: 20,),
                   SizedBox(
                     height: 650,
                     child: Column(
                       children: [
                         listTileWidget(
-
-                            heading:  Text('Orders',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? const Color(0xFFCD7F32) : Colors.white),),
+                            heading:  Text('Orders',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? ColorResource.colorYellow : Colors.white),),
                             icons: Container(
                               height: 40,
                               width:35,
@@ -70,7 +69,7 @@ class _AccountsPageState extends State<AccountsPage> {
                           color:Mytheme.isDark == false ? const Color(0xFF2E4053) : Colors.white,
                           thickness: 2,
                         ),
-                        listTileWidget(heading:  Text('Address',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? const Color(0xFFCD7F32) : Colors.white),),
+                        listTileWidget(heading:  Text('Address',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? ColorResource.colorYellow : Colors.white),),
                             icons: Container(
                               height: 40,
                               width:35,
@@ -88,7 +87,7 @@ class _AccountsPageState extends State<AccountsPage> {
                           color:Mytheme.isDark == false ? const Color(0xFF2E4053) : Colors.white,
                           thickness: 2,
                         ),
-                        listTileWidget(heading:  Text('Profile',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? const Color(0xFFCD7F32) : Colors.white),),
+                        listTileWidget(heading:  Text('Profile',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? ColorResource.colorYellow: Colors.white),),
                             icons: Container(
                               height: 40,
                               width:35,
@@ -107,7 +106,7 @@ class _AccountsPageState extends State<AccountsPage> {
                           color:Mytheme.isDark == false ? const Color(0xFF2E4053) : Colors.white,
                           thickness: 2,
                         ),
-                        listTileWidget(heading:  Text('WishList',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? const Color(0xFFCD7F32) : Colors.white),),
+                        listTileWidget(heading:  Text('WishList',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? ColorResource.colorYellow : Colors.white),),
                             icons: Container(
                               height: 40,
                               width:35,
@@ -122,25 +121,12 @@ class _AccountsPageState extends State<AccountsPage> {
                           //   MaterialPageRoute(builder: (context) =>  const DownloadsPage()),
                           // );
                         }),
+
                         Divider(
                           color:Mytheme.isDark == false ? const Color(0xFF2E4053) : Colors.white,
                           thickness: 2,
                         ),
-                        listTileWidget(heading:  Text('Coupons',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? const Color(0xFFCD7F32) : Colors.white),),
-                            icons: Container(
-                              height: 40,
-                              width:35,
-                              color: ColorResource.iconBackgroundColor,
-                              child: Center(
-                                child: Icon(Icons.account_balance_wallet_sharp),
-                              ),
-                            ),
-                            onTap: (){}),
-                        Divider(
-                          color:Mytheme.isDark == false ? const Color(0xFF2E4053) : Colors.white,
-                          thickness: 2,
-                        ),
-                        listTileWidget(heading:  Text('Help Center',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ? const Color(0xFFCD7F32) : Colors.white),),
+                        listTileWidget(heading:  Text('Help Center',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ?  ColorResource.colorYellow : Colors.white),),
                             icons: Container(
                               height: 40,
                               width:35,
@@ -153,6 +139,20 @@ class _AccountsPageState extends State<AccountsPage> {
                           // Navigator.pop(context);
                           // ShowLogoutDialog();
                         }),
+                        Divider(
+                          color:Mytheme.isDark == false ? const Color(0xFF2E4053) : Colors.white,
+                          thickness: 2,
+                        ),
+                        listTileWidget(heading:  Text('Logout',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Mytheme.isDark == false ?  ColorResource.colorYellow : Colors.white),),
+                            icons: Container(
+                              height: 40,
+                              width:35,
+                              color: ColorResource.iconBackgroundColor,
+                              child: Center(
+                                child: Icon(Icons.logout),
+                              ),
+                            ),
+                            onTap: (){}),
                       ],
                     ),
                   )
