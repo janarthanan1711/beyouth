@@ -7,6 +7,8 @@ class CardWidgetCart extends StatelessWidget {
   const CardWidgetCart({super.key, required this.cartModel});
 
   final CartModel cartModel;
+  // final void Function(CartModel cartmodels) removeDatas;
+  // final void Function(CartModel cartmodels)? addToFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +49,15 @@ class CardWidgetCart extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TextButton(onPressed: (){}, child: const Text('REMOVE',style: TextStyle(color: ColorResource.colorYellow),)),
+              TextButton(
+                  onPressed:(){
+                // removeDatas(cartModel);
+              }
+              , child: const Text('REMOVE',style: TextStyle(color: ColorResource.colorYellow),)),
               const Text('|'),
-              TextButton(onPressed: (){}, child: const Text('MOVE TO WISHLIST',style: TextStyle(color: ColorResource.colorYellow)))
+              TextButton(onPressed: (){
+
+              }, child: const Text('MOVE TO WISHLIST',style: TextStyle(color: ColorResource.colorYellow)))
             ],
           )
         ],

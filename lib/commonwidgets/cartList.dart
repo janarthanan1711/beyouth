@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../Modals/cartpagemodel.dart';
 class CartList extends StatelessWidget {
-  const CartList({super.key, required this.cartmodelDatas});
+  const CartList({super.key, required this.cartmodelDatas,required this.removeItem,required this.addItemToFavorite});
 
   final List<CartModel> cartmodelDatas;
+  final Function(CartModel cartmodels) removeItem;
+  final Function(CartModel cartmodels) addItemToFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,17 @@ class CartList extends StatelessWidget {
         child: ListView.builder(
             itemCount: cartmodelDatas.length,
             itemBuilder: (ctx,index){
-              return CardWidgetCart(cartModel: cartmodelDatas[index]);
+              return Dismissible(
+                key: ValueKey(cartmodelDatas[index]),
+                onDismissed: (direction){
+                  removeItem(cartmodelDatas[index]);
+                },
+                child: CardWidgetCart(
+                  cartModel: cartmodelDatas[index],
+                  // addToFavorite: addItemToFavorite(cartmodelDatas[index]),
+                  // removeDatas: removeItem(cartmodelDatas[index]),
+                ),
+              );
             }),
       ),
     );

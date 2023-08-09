@@ -9,18 +9,50 @@ import '../commonwidgets/cartList.dart';
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
+
+
   @override
   State<CartPage> createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
 
-  List<CartModel> gettedAddedList=[
-    CartModel('Jogger', 'assets/images/joggers.jpeg', 549, 'black', 'M'),
-    CartModel('Jogger', 'assets/images/joggers.jpeg', 549, 'black', 'M'),
-    CartModel('Jogger', 'assets/images/joggers.jpeg', 549, 'black', 'M'),
-    CartModel('Jogger', 'assets/images/joggers.jpeg', 549, 'black', 'M')
+ final List<CartModel> gettedAddedList=[
+    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
+   CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
+   CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
+   CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
   ];
+
+   addItemToFavorite(CartModel cartmodel){
+     // setState(() {
+     //
+     // });
+   }
+
+
+
+  void removeItemfromCart(CartModel cartmodel){
+    final cartIndex = gettedAddedList.indexOf(cartmodel);
+      Future.delayed(Duration.zero,(){
+        setState(() {
+          gettedAddedList.remove(cartmodel);
+        });
+      });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 3),
+          content: const Text('Cart Removed.'),
+          action: SnackBarAction(label: 'Undo', onPressed: (){
+            setState(() {
+              gettedAddedList.insert(cartIndex, cartmodel);
+            });
+          }),
+        )
+    );
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +80,10 @@ class _CartPageState extends State<CartPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CartList(cartmodelDatas: gettedAddedList,),
+            CartList(cartmodelDatas: gettedAddedList,
+               removeItem: removeItemfromCart,
+               addItemToFavorite: addItemToFavorite,
+            ),
             const SizedBox(height: 15,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
