@@ -1,3 +1,4 @@
+import 'package:beyouth/Views/signinpage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -7,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'Resources/config.dart';
 import 'Resources/theme.dart';
 import 'Views/mainpage.dart';
+import 'Views/splashscreen.dart';
 import 'numbercheck.dart';
 
 void main() async{
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData.light(),
               darkTheme: ThemeData.dark(),
               themeMode: currentTheme.currentTheme(),
-              home: const MainPage()
+              home: const SplashScreen()
           );
         })
     );
