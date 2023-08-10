@@ -181,12 +181,12 @@ class _SigninPageState extends State<SigninPage> {
                               InkWell(
                                 onTap: (){
                                   setState(() {
-                                    if(_formKey.currentState!.validate()){
+                                    // if(_formKey.currentState!.validate()){
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(builder: (context) =>   const MainPage()),
                                     );
-                                    }
+                                    // }
                                   });
                                 },
                                 child: Container(

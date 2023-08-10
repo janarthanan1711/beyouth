@@ -30,8 +30,6 @@ class _CartPageState extends State<CartPage> {
      // });
    }
 
-
-
   void removeItemfromCart(CartModel cartmodel){
     final cartIndex = gettedAddedList.indexOf(cartmodel);
       Future.delayed(Duration.zero,(){

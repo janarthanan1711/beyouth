@@ -33,7 +33,15 @@ class CardWidgetCart extends StatelessWidget {
               SizedBox(width: 20,),
               Column(
                 children: [
-                  Text(cartModel.productName!,style: TextStyle(fontWeight: FontWeight.bold,color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 25),),
+                  Row(
+                    children: [
+                      Text(cartModel.productName!,style: TextStyle(fontWeight: FontWeight.bold,color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 25),),
+                      SizedBox(width: 150,),
+                      IconButton(onPressed: (){
+
+                      }, icon: const Icon(Icons.favorite))
+                    ],
+                  ),
                   const SizedBox(height: 5,),
                   Text("₹ ${cartModel.productPrice!}",style: TextStyle(fontWeight: FontWeight.bold,color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 25),),
                   Row(children: [
@@ -46,18 +54,19 @@ class CardWidgetCart extends StatelessWidget {
             ],
           ),
           const Divider(color: Colors.black,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Column(
             children: [
-              TextButton(
-                  onPressed:(){
-                // removeDatas(cartModel);
-              }
-              , child: const Text('REMOVE',style: TextStyle(color: ColorResource.colorYellow),)),
-              const Text('|'),
-              TextButton(onPressed: (){
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Icon(
+                  Icons.arrow_back
+                ),
+                  const Text('Swipe to remove from cart',style: TextStyle(color: Colors.red,fontSize: 20),),
+                Icon(Icons.arrow_forward)
+                ],
+              ),
 
-              }, child: const Text('MOVE TO WISHLIST',style: TextStyle(color: ColorResource.colorYellow)))
             ],
           )
         ],

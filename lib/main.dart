@@ -9,7 +9,6 @@ import 'Resources/config.dart';
 import 'Resources/theme.dart';
 import 'Views/mainpage.dart';
 import 'Views/splashscreen.dart';
-import 'numbercheck.dart';
 
 void main() async{
 
