@@ -7,7 +7,9 @@ import 'package:beyouth/Views/product_description.dart';
 import 'package:beyouth/Views/search_page.dart';
 import 'package:flutter/material.dart';
 
+import '../Modals/cartpagemodel.dart';
 import '../Resources/colorresource.dart';
+import '../Resources/config.dart';
 import '../Resources/theme.dart';
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -17,6 +19,7 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+
   final List<Map> _products = List.generate(
       100,
           (index) => {
@@ -40,7 +43,7 @@ class _ProductPageState extends State<ProductPage> {
             );
           }, icon: const Icon(Icons.search)),
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Favorites()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  Favorites(favoriteModel: favoriteData.favoriteItems,)));
           }, icon: const Icon(Icons.favorite)),
           IconButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartPage()));
@@ -72,11 +75,15 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                     subtitle: Text("\u{20B9}${_products[index]['price'].toString()}",style: const TextStyle(
                         fontSize: 14,color: ColorResource.colorYellow)),
-                    trailing: const Row(
+                    trailing:  Row(
                       children: [
-                        Icon(Icons.shopping_cart),
+                        IconButton(onPressed : (){
+                          // addItemToFavorite(productList[index]);
+                        },icon: const Icon(Icons.shopping_cart)),
                         SizedBox(width: 6,),
-                        Icon(Icons.favorite)
+                        IconButton(onPressed: (){
+
+                        }, icon: Icon(Icons.favorite))
                       ],
                     )
                   ),

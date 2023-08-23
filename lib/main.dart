@@ -1,3 +1,4 @@
+import 'package:beyouth/Resources/favoriteadd.dart';
 import 'package:beyouth/Views/signinpage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -33,21 +34,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => Mytheme(),
-        child: Consumer<Mytheme>(builder: (context,state,child){
-          return MaterialApp(
-              title: 'BeYouth',
-              debugShowCheckedModeBanner: false,
-              // theme: ThemeData(
-              //   primarySwatch: Colors.blue,
-              // ),
-              theme: ThemeData.light(),
-              darkTheme: ThemeData.dark(),
-              themeMode: currentTheme.currentTheme(),
-              home: const SplashScreen()
-          );
-        })
+    return MultiProvider(
+      providers:[
+        ChangeNotifierProvider(
+        create: (context) => Mytheme(),),
+        ChangeNotifierProvider(create: (context)=> FavoriteList())
+      ] ,
+          child: Consumer<Mytheme>(builder: (context,state,child){
+            return MaterialApp(
+                title: 'BeYouth',
+                debugShowCheckedModeBanner: false,
+                // theme: ThemeData(
+                //   primarySwatch: Colors.blue,
+                // ),
+                theme: ThemeData.light(),
+                darkTheme: ThemeData.dark(),
+                themeMode: currentTheme.currentTheme(),
+                home: const SplashScreen()
+            );
+          })
+
     );
   }
 }

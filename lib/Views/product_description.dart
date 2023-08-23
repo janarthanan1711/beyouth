@@ -7,6 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../Resources/colorresource.dart';
+import '../Resources/config.dart';
 import '../Resources/theme.dart';
 import '../commonwidgets/productdesign.dart';
 import '../commonwidgets/sizechartwidget.dart';
@@ -71,7 +72,7 @@ class _DescriptionPageState extends State<DescriptionPage> {
         titleTextStyle: const TextStyle(fontSize: 30,color: ColorResource.colorYellow,fontWeight: FontWeight.bold),
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Favorites()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites(favoriteModel: favoriteData.favoriteItems)));
           }, icon: const Icon(Icons.favorite)),
           IconButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartPage()));

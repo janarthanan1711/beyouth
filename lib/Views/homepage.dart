@@ -8,6 +8,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import '../Modals/cartpagemodel.dart';
+import '../Resources/config.dart';
 import '../commonwidgets/productdesign.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         titleTextStyle: const TextStyle(fontSize: 30,color: ColorResource.colorYellow,fontWeight: FontWeight.bold),
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites(favoriteModel: favoriteData.favoriteItems,)));
           }, icon: const Icon(Icons.favorite))
         ],
         iconTheme: const IconThemeData(color: Colors.black),

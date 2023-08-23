@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/theme.dart';
 class CardWidgetCart extends StatelessWidget {
-  const CardWidgetCart({super.key, required this.cartModel});
+  const CardWidgetCart({super.key, required this.cartModel,required this.addToFavorite});
 
   final CartModel cartModel;
   // final void Function(CartModel cartmodels) removeDatas;
-  // final void Function(CartModel cartmodels)? addToFavorite;
+  final Function(CartModel cartmodels) addToFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,6 @@ class CardWidgetCart extends StatelessWidget {
                       image: DecorationImage(image: AssetImage(cartModel.productImage!),fit: BoxFit.fill)
                     ),
                   ),
-
                 ],
               ),
               SizedBox(width: 20,),
@@ -36,9 +35,9 @@ class CardWidgetCart extends StatelessWidget {
                   Row(
                     children: [
                       Text(cartModel.productName!,style: TextStyle(fontWeight: FontWeight.bold,color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 25),),
-                      SizedBox(width: 150,),
+                      const SizedBox(width: 150,),
                       IconButton(onPressed: (){
-
+                         addToFavorite(cartModel);
                       }, icon: const Icon(Icons.favorite))
                     ],
                   ),
@@ -54,7 +53,7 @@ class CardWidgetCart extends StatelessWidget {
             ],
           ),
           const Divider(color: Colors.black,),
-          Column(
+          const Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -62,7 +61,7 @@ class CardWidgetCart extends StatelessWidget {
                   Icon(
                   Icons.arrow_back
                 ),
-                  const Text('Swipe to remove from cart',style: TextStyle(color: Colors.red,fontSize: 20),),
+                  Text('Swipe to remove from cart',style: TextStyle(color: Colors.red,fontSize: 20),),
                 Icon(Icons.arrow_forward)
                 ],
               ),
