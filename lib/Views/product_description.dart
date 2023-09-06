@@ -6,20 +6,22 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import '../Providers/favorites_provider.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/config.dart';
 import '../Resources/theme.dart';
 import '../commonwidgets/productdesign.dart';
 import '../commonwidgets/sizechartwidget.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'favorites_page.dart';
-class DescriptionPage extends StatefulWidget {
+class DescriptionPage extends ConsumerStatefulWidget {
   const DescriptionPage({super.key});
 
   @override
-  State<DescriptionPage> createState() => _DescriptionPageState();
+  ConsumerState<DescriptionPage> createState() => _DescriptionPageState();
 }
 
-class _DescriptionPageState extends State<DescriptionPage> {
+class _DescriptionPageState extends ConsumerState<DescriptionPage> {
   int _activeIndex = 0;
   double rating = 0;
   List<String> sizes = [
@@ -72,7 +74,8 @@ class _DescriptionPageState extends State<DescriptionPage> {
         titleTextStyle: const TextStyle(fontSize: 30,color: ColorResource.colorYellow,fontWeight: FontWeight.bold),
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites(favoriteModel: favoriteData.favoriteItems)));
+            final getFavItems = ref.watch(addToFavorites);
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites(favoriteModel: getFavItems)));
           }, icon: const Icon(Icons.favorite)),
           IconButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartPage()));

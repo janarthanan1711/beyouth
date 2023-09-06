@@ -1,6 +1,7 @@
 import 'package:beyouth/Modals/categorymodels.dart';
 import 'package:flutter/material.dart';
 
+import '../Modals/productsmodel.dart';
 import '../Views/products_page.dart';
 class ProductDesignWidget extends StatelessWidget {
    ProductDesignWidget({super.key,required this.titles,required this.images,required this.height,required this.width});
@@ -17,7 +18,7 @@ class ProductDesignWidget extends StatelessWidget {
           ),
           child: InkWell(
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductPage()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductPage(productList: cartProductList,)));
             },
             child: Container(
               height: height,

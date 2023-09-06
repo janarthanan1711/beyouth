@@ -4,18 +4,20 @@ import 'package:beyouth/Views/favorites_page.dart';
 import 'package:beyouth/Views/search_page.dart';
 import 'package:flutter/material.dart';
 import '../Modals/cartpagemodel.dart';
+import '../Providers/favorites_provider.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/favoriteadd.dart';
 import '../Resources/theme.dart';
 import '../commonwidgets/cartList.dart';
-class CartPage extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+class CartPage extends ConsumerStatefulWidget {
   const CartPage({super.key, this.favoriteList});
   final favoriteList;
   @override
-  State<CartPage> createState() => _CartPageState();
+  ConsumerState<CartPage> createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CartPageState extends ConsumerState<CartPage> {
 
   void removeItemfromCart(CartModel cartmodel){
     final cartIndex = favoriteData.gettedAddedList.indexOf(cartmodel);
@@ -58,15 +60,17 @@ class _CartPageState extends State<CartPage> {
             );
           }, icon: const Icon(Icons.search)),
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites(favoriteModel: favoriteData.favoriteItems,)));
+            final getFavItems = ref.watch(addToFavorites);
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites(favoriteModel: getFavItems,)));
           }, icon: const Icon(Icons.favorite))
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+
             CartList(
-              cartmodelDatas: favoriteData.gettedAddedList,
+              cartmodelDatas:favoriteData.gettedAddedList,
                removeItem: removeItemfromCart,
             ),
             const SizedBox(height: 15,),

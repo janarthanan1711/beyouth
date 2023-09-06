@@ -1,24 +1,25 @@
 import 'dart:math';
 
+import 'package:beyouth/Providers/favorites_provider.dart';
 import 'package:beyouth/Resources/favoriteadd.dart';
 import 'package:beyouth/Views/search_page.dart';
 import 'package:flutter/material.dart';
-
 import '../Modals/cartpagemodel.dart';
 import '../Modals/productsmodel.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/theme.dart';
 import '../commonwidgets/favouritegrid.dart';
 import 'cartpage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Favorites extends StatefulWidget {
+class Favorites extends ConsumerStatefulWidget {
    const Favorites({super.key,this.favoriteModel});
    final List<CartModel>? favoriteModel;
 
   @override
-  State<Favorites> createState() => _FavoritesState();
+  ConsumerState<Favorites> createState() => _FavoritesState();
 }
-class _FavoritesState extends State<Favorites> {
+class _FavoritesState extends ConsumerState<Favorites> {
 
   void removeFavorite(int index) {
     widget.favoriteModel!.removeAt(index);
@@ -40,13 +41,12 @@ class _FavoritesState extends State<Favorites> {
           IconButton(onPressed: () {
             showSearch(
                 context: context,
-                // delegate to customize the search bar
                 delegate: CustomSearchDelegate()
             );
           }, icon: const Icon(Icons.search)),
           IconButton(onPressed: () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => CartPage()));
+                MaterialPageRoute(builder: (context) => const CartPage()));
           },
               icon: const Icon(Icons.shopping_cart))
         ],
@@ -62,7 +62,9 @@ class _FavoritesState extends State<Favorites> {
               mainAxisSpacing: 20),
           itemCount: widget.favoriteModel!.length,
           itemBuilder: (BuildContext ctx, index) {
-            return FavoriteGrid(favorite: widget.favoriteModel![index]);
+            final showRemovedItems = ref
+                .watch(addToFavorites);
+            return FavoriteGrid(favorite: showRemovedItems[index],checkPage: true,);
           }),
     );
   }

@@ -1,17 +1,18 @@
 import 'package:beyouth/Modals/cartpagemodel.dart';
 import 'package:flutter/material.dart';
 
+import '../Providers/favorites_provider.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/theme.dart';
-class CardWidgetCart extends StatelessWidget {
-  const CardWidgetCart({super.key, required this.cartModel,required this.addToFavorite});
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+class CardWidgetCart extends ConsumerWidget{
+  const CardWidgetCart({super.key, required this.cartModel});
 
   final CartModel cartModel;
   // final void Function(CartModel cartmodels) removeDatas;
-  final Function(CartModel cartmodels) addToFavorite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Card(
       child: Column(
         children: [
@@ -37,7 +38,12 @@ class CardWidgetCart extends StatelessWidget {
                       Text(cartModel.productName!,style: TextStyle(fontWeight: FontWeight.bold,color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 25),),
                       const SizedBox(width: 150,),
                       IconButton(onPressed: (){
-                         addToFavorite(cartModel);
+                        final wasAdded = ref
+                            .read(addToFavorites.notifier)
+                            .toggleToAddItems(cartModel);
+                        // ScaffoldMessenger.of(context).clearSnackBars();
+                        // ScaffoldMessenger.of(context)
+                        //     .showSnackBar(SnackBar(content: Text(wasAdded ? 'Meal Added as Favorite' : 'Meal Removed')));
                       }, icon: const Icon(Icons.favorite))
                     ],
                   ),

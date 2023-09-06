@@ -1,26 +1,32 @@
 import 'dart:math';
-
 import 'package:beyouth/Modals/cartpagemodel.dart';
+import 'package:beyouth/Providers/favorites_provider.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/favoriteadd.dart';
-class FavoriteGrid extends StatefulWidget {
-  const FavoriteGrid({super.key, required this.favorite});
+class FavoriteGrid extends ConsumerStatefulWidget {
+  const FavoriteGrid({super.key, required this.favorite,required this.checkPage});
   final CartModel favorite;
+  final bool checkPage;
 
   @override
-  State<FavoriteGrid> createState() => _FavoriteGridState();
+  ConsumerState<FavoriteGrid> createState() => _FavoriteGridState();
 }
-class _FavoriteGridState extends State<FavoriteGrid> {
+class _FavoriteGridState extends ConsumerState<FavoriteGrid> {
   @override
   Widget build(BuildContext context) {
     return GridTile(
       header: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          IconButton(onPressed: () {},
-              icon: const Icon(Icons.close))
+         widget.checkPage == true ? IconButton(onPressed: () {
+            final removeItem = ref
+                .read(addToFavorites.notifier)
+                .toggleToRemoveItems(widget.favorite);
+          },
+              icon: const Icon(Icons.close),
+         ) : const SizedBox()
         ],
       ),
       footer: GridTileBar(
@@ -38,11 +44,19 @@ class _FavoriteGridState extends State<FavoriteGrid> {
                   fontSize: 14, color: ColorResource.colorYellow)),
           trailing: Row(
             children: [
+            widget.checkPage == false ?  IconButton(onPressed: (){
+              final addItem = ref
+                  .read(addToFavorites.notifier)
+                  .toggleToAddItems(widget.favorite);
+              }, icon: const Icon(Icons.favorite)) :const SizedBox(),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // final addItem = ref
+                    //     .read(addToFavorites.notifier)
+                    //     .toggleToAddItems(widget.favorite);
+                  },
                   icon: const Icon(Icons.add_shopping_cart)),
               const SizedBox(width: 6,),
-
             ],
           )
       ),

@@ -9,16 +9,19 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import '../Modals/cartpagemodel.dart';
+import '../Modals/productsmodel.dart';
+import '../Providers/favorites_provider.dart';
 import '../Resources/config.dart';
 import '../commonwidgets/productdesign.dart';
-class HomePage extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
 
   int _activeIndex = 0;
   @override
@@ -31,7 +34,8 @@ class _HomePageState extends State<HomePage> {
         titleTextStyle: const TextStyle(fontSize: 30,color: ColorResource.colorYellow,fontWeight: FontWeight.bold),
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites(favoriteModel: favoriteData.favoriteItems,)));
+            final getFavItems = ref.watch(addToFavorites);
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => Favorites(favoriteModel: getFavItems,)));
           }, icon: const Icon(Icons.favorite))
         ],
         iconTheme: const IconThemeData(color: Colors.black),
@@ -78,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                        itemBuilder: (context,index){
                         return InkWell(
                           onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductPage()));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductPage(productList: cartProductList,)));
                           },
                           child: Column(
                             children: [

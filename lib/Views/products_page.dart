@@ -5,29 +5,28 @@ import 'package:beyouth/Views/cartpage.dart';
 import 'package:beyouth/Views/favorites_page.dart';
 import 'package:beyouth/Views/product_description.dart';
 import 'package:beyouth/Views/search_page.dart';
+import 'package:beyouth/commonwidgets/favouritegrid.dart';
 import 'package:flutter/material.dart';
 
 import '../Modals/cartpagemodel.dart';
+import '../Providers/favorites_provider.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/config.dart';
 import '../Resources/theme.dart';
-class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+class ProductPage extends ConsumerStatefulWidget {
+  const ProductPage({super.key,required this.productList});
+  final List<CartModel>? productList;
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
+  ConsumerState<ProductPage> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _ProductPageState extends ConsumerState<ProductPage> {
 
-  final List<Map> _products = List.generate(
-      100,
-          (index) => {
-        "id": index,
-        "price": Random().nextInt(1000)
-      }).toList();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Mytheme.isDark == true ? ColorResource.colorDark : ColorResource.bottomNavcolor,
       appBar: AppBar(
@@ -43,7 +42,8 @@ class _ProductPageState extends State<ProductPage> {
             );
           }, icon: const Icon(Icons.search)),
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  Favorites(favoriteModel: favoriteData.favoriteItems,)));
+            final getFavItems = ref.watch(addToFavorites);
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  Favorites(favoriteModel: getFavItems)));
           }, icon: const Icon(Icons.favorite)),
           IconButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartPage()));
@@ -58,44 +58,45 @@ class _ProductPageState extends State<ProductPage> {
                 childAspectRatio: 2 / 3,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20),
-            itemCount: productList.length,
+            itemCount: cartProductList.length,
             itemBuilder: (BuildContext ctx, index) {
               return InkWell(
                 onTap: (){
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DescriptionPage()));
                 },
-                child: GridTile(
-                  key: ValueKey(_products[index]['id']),
-                  footer: GridTileBar(
-                    backgroundColor: Colors.black54,
-                    title: Text(
-                      productList[index].categoryTitles,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold,color: ColorResource.colorYellow),
-                    ),
-                    subtitle: Text("\u{20B9}${_products[index]['price'].toString()}",style: const TextStyle(
-                        fontSize: 14,color: ColorResource.colorYellow)),
-                    trailing:  Row(
-                      children: [
-                        IconButton(onPressed : (){
-                          // addItemToFavorite(productList[index]);
-                        },icon: const Icon(Icons.shopping_cart)),
-                        SizedBox(width: 6,),
-                        IconButton(onPressed: (){
-
-                        }, icon: Icon(Icons.favorite))
-                      ],
-                    )
-                  ),
-                  child: Container(
-                    height: 200,
-                    width: 160,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage(productList[index].categoryImages),fit: BoxFit.fill)
-                    ),
-                  ),
-
-                ),
+                child: FavoriteGrid(favorite: widget.productList![index],checkPage: false,),
+                // child: GridTile(
+                //   key: ValueKey(cartModel.id),
+                //   footer: GridTileBar(
+                //     backgroundColor: Colors.black54,
+                //     title: Text(
+                //       productList[index].categoryTitles,
+                //       style: const TextStyle(
+                //           fontSize: 18, fontWeight: FontWeight.bold,color: ColorResource.colorYellow),
+                //     ),
+                //     subtitle: Text("\u{20B9}${cartProductList[index].productPrice.toString()}",style: const TextStyle(
+                //         fontSize: 14,color: ColorResource.colorYellow)),
+                //     trailing:  Row(
+                //       children: [
+                //         IconButton(onPressed : (){
+                //           // addItemToFavorite(productList[index]);
+                //         },icon: const Icon(Icons.shopping_cart)),
+                //         const SizedBox(width: 6,),
+                //         IconButton(onPressed: (){
+                //           addtoFavorite(cartModel);
+                //         }, icon: const Icon(Icons.favorite))
+                //       ],
+                //     )
+                //   ),
+                //   child: Container(
+                //     height: 200,
+                //     width: 160,
+                //     decoration: BoxDecoration(
+                //       image: DecorationImage(image: AssetImage(cartProductList[index].productImage!),fit: BoxFit.fill)
+                //     ),
+                //   ),
+                //
+                // ),
               );
             }),
       );

@@ -18,18 +18,12 @@ class FavoriteList with ChangeNotifier {
     notifyListeners();
   }
 
-  final List<CartModel> favoriteItems =[
-    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
-    CartModel(productName: 'polo', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
-    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
-    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
-  ];
 
   final List<CartModel> gettedAddedList=[
-    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
-    CartModel(productName: 'polo', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
-    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
-    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M'),
+    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M',id: 1),
+    CartModel(productName: 'polo', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M',id: 2),
+    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M',id: 3),
+    CartModel(productName: 'Jogger', productImage: 'assets/images/joggers.jpeg',productPrice:  549, color: 'black', size: 'M',id: 4),
   ];
 }
 

@@ -4,26 +4,21 @@ import 'package:flutter/material.dart';
 
 import '../Modals/cartpagemodel.dart';
 import '../Resources/config.dart';
-class CartList extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+class CartList extends ConsumerStatefulWidget {
   const CartList({super.key, required this.cartmodelDatas,required this.removeItem});
 
   final List cartmodelDatas;
   final Function(CartModel cartmodels) removeItem;
-  // final Function(CartModel cartmodels) addItemToFavorite;
+
 
   @override
-  State<CartList> createState() => _CartListState();
+  ConsumerState<CartList> createState() => _CartListState();
 }
 
 
-class _CartListState extends State<CartList> {
-  addItemToFavorite(CartModel favorites){
-    Future.delayed(Duration.zero,(){
-      setState(() {
-        favoriteData.favoriteItems.add(favorites);
-      });
-    });
-  }
+class _CartListState extends ConsumerState<CartList> {
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -40,7 +35,6 @@ class _CartListState extends State<CartList> {
                 },
                 child: CardWidgetCart(
                   cartModel: widget.cartmodelDatas[index],
-                  addToFavorite: addItemToFavorite
                   // removeDatas: removeItem(cartmodelDatas[index]),
                 ),
               );
