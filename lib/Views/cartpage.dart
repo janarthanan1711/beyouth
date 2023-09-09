@@ -4,6 +4,7 @@ import 'package:beyouth/Views/favorites_page.dart';
 import 'package:beyouth/Views/search_page.dart';
 import 'package:flutter/material.dart';
 import '../Modals/cartpagemodel.dart';
+import '../Providers/cart_provider.dart';
 import '../Providers/favorites_provider.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/favoriteadd.dart';
@@ -42,6 +43,7 @@ class _CartPageState extends ConsumerState<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final showAddedCarts = ref.watch(toggleAddToCart);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -68,9 +70,8 @@ class _CartPageState extends ConsumerState<CartPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-
             CartList(
-              cartmodelDatas:favoriteData.gettedAddedList,
+              cartmodelDatas:showAddedCarts,
                removeItem: removeItemfromCart,
             ),
             const SizedBox(height: 15,),

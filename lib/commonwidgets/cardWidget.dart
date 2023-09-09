@@ -1,6 +1,6 @@
 import 'package:beyouth/Modals/cartpagemodel.dart';
 import 'package:flutter/material.dart';
-
+import 'package:beyouth/Providers/cart_provider.dart';
 import '../Providers/favorites_provider.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/theme.dart';
@@ -30,28 +30,21 @@ class CardWidgetCart extends ConsumerWidget{
                   ),
                 ],
               ),
-              SizedBox(width: 20,),
+              const SizedBox(width: 20,),
               Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(cartModel.productName!,style: TextStyle(fontWeight: FontWeight.bold,color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 25),),
-                      const SizedBox(width: 150,),
-                      IconButton(onPressed: (){
-                        final wasAdded = ref
-                            .read(addToFavorites.notifier)
-                            .toggleToAddItems(cartModel);
-                        // ScaffoldMessenger.of(context).clearSnackBars();
-                        // ScaffoldMessenger.of(context)
-                        //     .showSnackBar(SnackBar(content: Text(wasAdded ? 'Meal Added as Favorite' : 'Meal Removed')));
-                      }, icon: const Icon(Icons.favorite))
                     ],
                   ),
                   const SizedBox(height: 5,),
                   Text("₹ ${cartModel.productPrice!}",style: TextStyle(fontWeight: FontWeight.bold,color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 25),),
-                  Row(children: [
+                  Row(
+                    children: [
                     Text(cartModel.color!,style: TextStyle(color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 18),),
-                    const SizedBox(width: 20,),
+                    const SizedBox(width: 10,),
                     Text("Size : ${cartModel.size}",style: TextStyle(color: Mytheme.isDark == true ? ColorResource.colorYellow : Colors.black,fontSize: 18),)
                   ],)
                 ],
@@ -59,18 +52,34 @@ class CardWidgetCart extends ConsumerWidget{
             ],
           ),
           const Divider(color: Colors.black,),
-          const Column(
+           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Icon(
-                  Icons.arrow_back
-                ),
-                  Text('Swipe to remove from cart',style: TextStyle(color: Colors.red,fontSize: 20),),
-                Icon(Icons.arrow_forward)
+                 InkWell(
+                   child:Text('Remove',style: TextStyle(color: Colors.grey,fontSize: 20),),
+                   onTap: (){
+                     final wasRemoved = ref.
+                     read(toggleAddToCart.notifier).
+                     removeFromCart(cartModel);
+                   },
+                 ),
+                 const Text('|',style: TextStyle(color: Colors.grey,fontSize: 20)),
+                  InkWell(
+                    child:Text('Move To Favorite',style: TextStyle(color: Colors.grey,fontSize: 20),),
+                    onTap: (){
+                      final wasAdded = ref
+                          .read(addToFavorites.notifier)
+                          .toggleToAddItems(cartModel);
+                    },
+                  ),
                 ],
               ),
+             const SizedBox(
+                height: 10,
+              )
 
             ],
           )

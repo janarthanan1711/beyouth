@@ -20,11 +20,6 @@ class Favorites extends ConsumerStatefulWidget {
   ConsumerState<Favorites> createState() => _FavoritesState();
 }
 class _FavoritesState extends ConsumerState<Favorites> {
-
-  void removeFavorite(int index) {
-    widget.favoriteModel!.removeAt(index);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,21 +1,19 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:beyouth/Resources/colorresource.dart';
+import 'package:beyouth/Views/favorites_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../Providers/favorites_provider.dart';
 import '../Resources/config.dart';
 import '../Resources/theme.dart';
 
-class AccountsPage extends StatefulWidget {
+class AccountsPage extends ConsumerWidget {
   const AccountsPage({super.key});
 
   @override
-  State<AccountsPage> createState() => _AccountsPageState();
-}
-
-class _AccountsPageState extends State<AccountsPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
       // backgroundColor: Mytheme.isDark == true ? const Color(0xFF2E4053) : const Color(0xFFEAEAEA),
       body: Center(
@@ -116,10 +114,11 @@ class _AccountsPageState extends State<AccountsPage> {
                               ),
                             ),
                             onTap: (){
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) =>  const DownloadsPage()),
-                          // );
+                              final getFavItems = ref.watch(addToFavorites);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  Favorites(favoriteModel: getFavItems,)),
+                          );
                         }),
 
                         Divider(

@@ -3,6 +3,7 @@ import 'package:beyouth/Modals/cartpagemodel.dart';
 import 'package:beyouth/Providers/favorites_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../Providers/cart_provider.dart';
 import '../Resources/colorresource.dart';
 import '../Resources/favoriteadd.dart';
 class FavoriteGrid extends ConsumerStatefulWidget {
@@ -51,9 +52,9 @@ class _FavoriteGridState extends ConsumerState<FavoriteGrid> {
               }, icon: const Icon(Icons.favorite)) :const SizedBox(),
               IconButton(
                   onPressed: () {
-                    // final addItem = ref
-                    //     .read(addToFavorites.notifier)
-                    //     .toggleToAddItems(widget.favorite);
+                    final addItem = ref
+                        .read(toggleAddToCart.notifier)
+                        .addToCart(widget.favorite);
                   },
                   icon: const Icon(Icons.add_shopping_cart)),
               const SizedBox(width: 6,),
